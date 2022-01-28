@@ -37,10 +37,11 @@ public class Main {
         pRepo.save(p1);
         pRepo.save(p2);
 
-        System.out.println("Reading data from DB\n---------");
-        for(Person p : pRepo.findAll()) {
+        System.out.println("mario.cartia@gmail.com: "+pRepo.mySearch("mario.cartia@gmail.com").size());
+        System.out.println("pippo.pappo@yahoo.com: "+pRepo.mySearch("pippo.pappo@yahoo.com").size());
+
+        for (Person p : pRepo.findByFirstName("Mario")) {
             System.out.println("> "+p);
         }
-
     }
 }
