@@ -1,7 +1,7 @@
-CREATE TABLE person (
-    id INT NOT NULL,
-    firstName VARCHAR(50) NOT NULL,
-    lastName VARCHAR(50) NOT NULL,
-    email VARCHAR(50),
-    PRIMARY KEY (id)
+CREATE TABLE PERSON (
+    ID INT NOT NULL auto_increment,
+    FIRST_NAME VARCHAR(50) NOT NULL,
+    LAST_NAME VARCHAR(50) NOT NULL,
+    EMAIL VARCHAR(50),
+    PRIMARY KEY (ID)
 );

@@ -21,16 +21,22 @@
             <version>5.3.15</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
-        <dependency>
+        <!--dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
             <version>5.3.15</version>
+        </dependency-->
+        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jdbc -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jdbc</artifactId>
+            <version>2.3.1</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>2.1.210</version>
+            <version>1.4.200</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-aop -->
         <dependency>

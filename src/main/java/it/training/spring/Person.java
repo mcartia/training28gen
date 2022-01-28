@@ -1,8 +1,10 @@
 package it.training.spring;
 
+import org.springframework.data.annotation.Id;
+
 public class Person {
 
-    private int id;
+    @Id private Integer id;
     private String firstName;
     private String lastName;
     private String email;
@@ -11,11 +13,11 @@ public class Person {
         super();
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

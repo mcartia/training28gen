@@ -13,7 +13,7 @@ import java.util.List;
 public class Main {
 
     @Autowired
-    JdbcOperations jdbc;
+    PersonRepository pRepo;
 
     public static void main(String[] args) {
         ApplicationContext ctx = new AnnotationConfigApplicationContext(
@@ -24,22 +24,21 @@ public class Main {
     }
 
     public void run(String[] args) {
-        jdbc.execute("INSERT INTO person(id, firstName, lastName, email) VALUES(1,'Mario','Cartia','mario.cartia@gmail.com')");
-        jdbc.execute("INSERT INTO person(id, firstName, lastName, email) VALUES(2,'Giuseppe','Rossi','giuseppe.rossi@gmail.com')");
+        Person p1 = new Person();
+        p1.setFirstName("Mario");
+        p1.setLastName("Cartia");
+        p1.setEmail("mario.cartia@gmail.com");
 
-        /*SqlRowSet rs = jdbc.queryForRowSet("SELECT * FROM person");
-        System.out.println("Fetching data\n--------");
-        while(rs.next()){
-            System.out.println("id: "+rs.getInt("id"));
-            System.out.println("first name: "+rs.getString("firstName"));
-            System.out.println("last namne: "+rs.getString("lastName"));
-            System.out.println("email: "+rs.getString("email"));
-            System.out.println("--------");
-        }*/
+        Person p2 = new Person();
+        p2.setFirstName("Giuseppe");
+        p2.setLastName("Rossi");
+        p2.setEmail("giuseppe.rossi@gmail.com");
 
-        List<Person> persons = jdbc.query("SELECT * FROM person",new PersonMapper());
+        pRepo.save(p1);
+        pRepo.save(p2);
 
-        for (Person p : persons) {
+        System.out.println("Reading data from DB\n---------");
+        for(Person p : pRepo.findAll()) {
             System.out.println("> "+p);
         }
 

@@ -3,15 +3,22 @@ package it.training.spring;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jdbc.repository.config.AbstractJdbcConfiguration;
+import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.jdbc.support.JdbcTransactionManager;
+import org.springframework.transaction.TransactionManager;
 
 import javax.sql.DataSource;
 
 @Configuration
-public class DbConfiguration {
+@EnableJdbcRepositories
+public class DbConfiguration extends AbstractJdbcConfiguration {
 
     @Autowired
     DataSource dataSource;
@@ -28,8 +35,13 @@ public class DbConfiguration {
     }
 
     @Bean
-    public JdbcOperations jdbcOperations() {
-        return new JdbcTemplate(dataSource);
+    public NamedParameterJdbcOperations jdbcOperations() {
+        return new NamedParameterJdbcTemplate(dataSource);
+    }
+
+    @Bean
+    public TransactionManager transactionManager() {
+        return new JdbcTransactionManager(dataSource);
     }
 
 }
