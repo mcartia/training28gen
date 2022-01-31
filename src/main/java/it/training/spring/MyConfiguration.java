@@ -4,6 +4,8 @@ import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.annotation.*;
+import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @ComponentScans({
@@ -11,6 +13,7 @@ import org.springframework.context.annotation.*;
 })
 @EnableAspectJAutoProxy
 @EnableCaching
+@EnableTransactionManagement
 public class MyConfiguration {
 
     @Bean

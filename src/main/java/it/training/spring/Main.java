@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.jdbc.core.JdbcOperations;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,15 @@ public class Main {
     @Autowired
     PersonRepository pRepo;
 
+    @Autowired
+    PersonGenerator personGenerator;
+
+    @Autowired
+    PersonService personService;
+
+    @Autowired
+    PersonRepository personRepository;
+
     public static void main(String[] args) {
         ApplicationContext ctx = new AnnotationConfigApplicationContext(
                 MyConfiguration.class,
@@ -24,24 +34,14 @@ public class Main {
     }
 
     public void run(String[] args) {
-        Person p1 = new Person();
-        p1.setFirstName("Mario");
-        p1.setLastName("Cartia");
-        p1.setEmail("mario.cartia@gmail.com");
-
-        Person p2 = new Person();
-        p2.setFirstName("Giuseppe");
-        p2.setLastName("Rossi");
-        p2.setEmail("giuseppe.rossi@gmail.com");
-
-        pRepo.save(p1);
-        pRepo.save(p2);
-
-        System.out.println("mario.cartia@gmail.com: "+pRepo.mySearch("mario.cartia@gmail.com").size());
-        System.out.println("pippo.pappo@yahoo.com: "+pRepo.mySearch("pippo.pappo@yahoo.com").size());
-
-        for (Person p : pRepo.findByFirstName("Mario")) {
-            System.out.println("> "+p);
+        try {
+            personService.savePersons(personGenerator.buildPersons(50));
+        } catch (Exception e) {
+            System.err.println("Si è verificato un errore...");
         }
+
+        System.out.println("Record(s) on DB table: "+personRepository.count());
+
     }
 }
+
